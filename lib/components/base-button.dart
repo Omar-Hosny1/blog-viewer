@@ -16,7 +16,7 @@ class BaseButton extends StatelessWidget {
   });
 
   final ButtonStyleVariants styleVariants;
-  final Function onClick;
+  final void Function()? onClick;
   final Icon? icon;
   final String? imagePath;
   final String label;
@@ -47,7 +47,7 @@ class BaseButton extends StatelessWidget {
                 )),
           ),
         ),
-        onPressed: () => onClick(),
+        onPressed: onClick,
         icon: icon ??
             Image.asset(
               imagePath ?? 'assets/icons/thunder.png',
@@ -78,7 +78,7 @@ class BaseButton extends StatelessWidget {
         ),
       ),
       child: Text(label),
-      onPressed: () => onClick(),
+      onPressed: onClick,
     );
   }
 }
