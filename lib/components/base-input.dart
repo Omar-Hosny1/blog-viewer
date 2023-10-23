@@ -22,12 +22,12 @@ class BaseInput extends StatelessWidget {
       validator: validator,
       cursorColor: Colors.white,
       obscureText: isPassword ?? false,
-      style: TextStyle(
+      style: const TextStyle(
         color: SecondaryColor,
       ),
       decoration: InputDecoration(
         errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: Colors.red,
             width: 2,
           ),
@@ -36,11 +36,11 @@ class BaseInput extends StatelessWidget {
           ),
         ),
         hintText: label,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: SecondaryColor,
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: SecondaryColor,
           ),
           borderRadius: BorderRadius.circular(
@@ -48,7 +48,7 @@ class BaseInput extends StatelessWidget {
           ),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: SecondaryColor,
           ),
           borderRadius: BorderRadius.circular(

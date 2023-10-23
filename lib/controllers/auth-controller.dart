@@ -1,10 +1,28 @@
+import 'package:blog_viewer/models/user-data.dart';
+import 'package:blog_viewer/screens/auth.dart';
+import 'package:blog_viewer/screens/home.dart';
 import 'package:blog_viewer/services/auth-service.dart';
 import 'package:blog_viewer/utils/catch-error.dart';
+import 'package:blog_viewer/utils/prefs-keys.dart';
 import 'package:blog_viewer/utils/snackbar.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
   static AuthController get to => Get.find<AuthController>();
+
+  _saveDataInPrefs(UserData userData) async {
+    final prefs = await SharedPreferences.getInstance();
+    final expiresIn = DateTime.now()
+        .add(Duration(seconds: int.parse(userData.expiresIn)))
+        .toIso8601String();
+
+    await prefs.setString(TOKEN, userData.idToken);
+    await prefs.setString(
+      EXPIRES_IN,
+      expiresIn,
+    );
+  }
 
   signin({required String email, required String password}) {
     handleNetworkRequests(
@@ -18,7 +36,8 @@ class AuthController extends GetxController {
           'Logged in Successfuly',
           'Logged in Successfuly',
         );
-        print(response);
+        _saveDataInPrefs(response);
+        Get.toNamed(Home.routeName);
       },
     );
   }
@@ -35,8 +54,22 @@ class AuthController extends GetxController {
           'Signed up Successfuly',
           'Signed up Successfuly',
         );
-        print(response);
+        _saveDataInPrefs(response);
+        Get.toNamed(Home.routeName);
       },
     );
+  }
+
+  Future<String> getInitialRoute() async {
+    final prefs = await SharedPreferences.getInstance();
+    final expiresIn = DateTime.parse(
+      prefs.getString(EXPIRES_IN) ??
+          DateTime.now().subtract(const Duration(hours: 1)).toIso8601String(),
+    );
+
+    if (expiresIn.isBefore(DateTime.now())) {
+      return Auth.routeName;
+    }
+    return Home.routeName;
   }
 }

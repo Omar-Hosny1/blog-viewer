@@ -4,7 +4,10 @@ import 'package:blog_viewer/models/user-data.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  static login({required String email, required String password}) async {
+  static Future<UserData> login({
+    required String email,
+    required String password,
+  }) async {
     try {
       const apiKey = 'AIzaSyBz9uuglu3Ni57p4vgTm0Qf6UTljgnpkiA';
       const loginEP =
@@ -30,7 +33,10 @@ class AuthService {
     }
   }
 
-  static signup({required String email, required String password}) async {
+  static Future<UserData> signup({
+    required String email,
+    required String password,
+  }) async {
     try {
       const apiKey = 'AIzaSyBz9uuglu3Ni57p4vgTm0Qf6UTljgnpkiA';
       const loginEP =

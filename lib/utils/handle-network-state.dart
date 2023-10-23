@@ -5,9 +5,9 @@ Widget handleNetworkState<T>({
   required Function buildChild,
 }) {
   if (snapshot.connectionState == ConnectionState.waiting) {
-    return CircularProgressIndicator();
+    return const Center(child: CircularProgressIndicator());
   } else if (snapshot.hasError == true) {
-    return Text(snapshot.error.toString());
+    return Center(child: Text(snapshot.error.toString()));
   }
   return buildChild(snapshot.data);
 }

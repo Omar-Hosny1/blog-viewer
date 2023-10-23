@@ -32,7 +32,7 @@ class Details extends StatelessWidget {
         children: [
           Center(child: Image.asset("assets/icons/overlyB.png")),
           Container(
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               top: 20,
               left: 20,
               right: 20,
@@ -51,12 +51,12 @@ class Details extends StatelessWidget {
                           withCopy: true,
                           copyColor: SecondaryColor,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         InfoCard(
                           text: blog.body,
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 19,
                             fontWeight: FontWeight.w300,
                             color: Colors.white,
@@ -67,7 +67,7 @@ class Details extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 SizedBox(
