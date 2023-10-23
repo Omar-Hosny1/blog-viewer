@@ -1,19 +1,17 @@
+import 'package:blog_viewer/controllers/auth-controller.dart';
 import 'package:blog_viewer/routes/routes.dart';
 import 'package:blog_viewer/screens/auth.dart';
+import 'package:blog_viewer/screens/home.dart';
+import 'package:blog_viewer/screens/splash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
   const App({super.key});
-
-  loadDotEnv() async {
-    await dotenv.load(fileName: ".env");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,23 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Blog Viewer',
       getPages: Routes.routes,
-      initialRoute: Auth.routeName,
+      home: GetBuilder(
+        init: AuthController(),
+        builder: (controller) {
+          return FutureBuilder(
+            future: controller.getInitialRoute(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Splash();
+              } else if (snapshot.data == Auth.routeName) {
+                return Auth();
+              } else {
+                return const Home();
+              }
+            },
+          );
+        },
+      ),
     );
   }
 }

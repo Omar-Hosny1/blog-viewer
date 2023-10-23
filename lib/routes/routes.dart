@@ -7,11 +7,11 @@ class Routes {
   static final routes = [
     GetPage(
       name: Home.routeName,
-      page: () => Home(),
+      page: () => const Home(),
     ),
     GetPage(
       name: Details.routeName,
-      page: () => Details(),
+      page: () => const Details(),
     ),
     GetPage(
       name: Auth.routeName,

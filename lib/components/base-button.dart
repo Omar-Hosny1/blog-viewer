@@ -30,7 +30,7 @@ class BaseButton extends StatelessWidget {
         style: ButtonStyle(
           padding: padding ??
               MaterialStateProperty.all(
-                EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
               ),
           backgroundColor: MaterialStateProperty.all<Color>(
             styleVariants == ButtonStyleVariants.normal
@@ -42,7 +42,7 @@ class BaseButton extends StatelessWidget {
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50.0),
-                side: BorderSide(
+                side: const BorderSide(
                   color: SecondaryColor,
                 )),
           ),
@@ -60,7 +60,7 @@ class BaseButton extends StatelessWidget {
       style: ButtonStyle(
         padding: padding ??
             MaterialStateProperty.all(
-              EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
             ),
         backgroundColor: MaterialStateProperty.all<Color>(
           styleVariants == ButtonStyleVariants.normal
@@ -72,13 +72,13 @@ class BaseButton extends StatelessWidget {
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50.0),
-              side: BorderSide(
+              side: const BorderSide(
                 color: SecondaryColor,
               )),
         ),
       ),
-      child: Text(label),
       onPressed: onClick,
+      child: Text(label),
     );
   }
 }

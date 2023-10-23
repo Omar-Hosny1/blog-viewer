@@ -5,8 +5,8 @@ import 'package:blog_viewer/models/blog.dart';
 import 'package:get/get.dart';
 
 class BlogView extends StatelessWidget {
-  BlogView({super.key, required this.blog});
-  
+  const BlogView({super.key, required this.blog});
+
   final Blog blog;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class BlogView extends StatelessWidget {
             ),
           ),
           width: double.infinity,
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         ),
         Positioned(
           left: 0,
@@ -31,12 +31,12 @@ class BlogView extends StatelessWidget {
         ),
         Container(
           height: 150,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 15,
           ),
           width: double.infinity,
-          margin: EdgeInsets.symmetric(
+          margin: const EdgeInsets.symmetric(
             horizontal: 10,
             vertical: 5,
           ),
@@ -52,9 +52,9 @@ class BlogView extends StatelessWidget {
                 children: [
                   Text(
                     blog.title.length > 10
-                        ? blog.title.substring(0, 10).toUpperCase()
+                        ? '${blog.title.substring(0, 10).toUpperCase()}...'
                         : blog.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: SecondaryColor,
                       fontSize: 26,
                       fontWeight: FontWeight.bold,
@@ -65,16 +65,16 @@ class BlogView extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  blog.body.length > 60
-                      ? blog.body.substring(0, 60)
+                  blog.body.length > 40
+                      ? '${blog.body.substring(0, 40)}...'
                       : blog.body,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 19,
                   ),
@@ -84,6 +84,8 @@ class BlogView extends StatelessWidget {
           ),
         ),
         Positioned(
+          right: 25,
+          bottom: 15,
           child: InkWell(
             onTap: () {
               Get.toNamed(
@@ -98,8 +100,6 @@ class BlogView extends StatelessWidget {
               ),
             ),
           ),
-          right: 25,
-          bottom: 15,
         )
       ],
     );

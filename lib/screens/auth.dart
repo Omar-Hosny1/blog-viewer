@@ -55,7 +55,7 @@ class Auth extends StatelessWidget {
                 child: Form(
                     key: _formKey,
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
                       child: Column(
                         children: [
                           BaseInput(
@@ -63,7 +63,7 @@ class Auth extends StatelessWidget {
                             onSaved: (value) => _enteredEmail = value,
                             validator: (value) => validateEmail(value ?? ''),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           BaseInput(
@@ -72,7 +72,7 @@ class Auth extends StatelessWidget {
                             isPassword: true,
                             validator: (value) => validatePassword(value ?? ''),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           SizedBox(
@@ -80,7 +80,7 @@ class Auth extends StatelessWidget {
                             child: Obx(
                               () => BaseButton(
                                 padding: MaterialStateProperty.all(
-                                  EdgeInsets.symmetric(
+                                  const EdgeInsets.symmetric(
                                     vertical: 15.0,
                                     horizontal: 60.0,
                                   ),
@@ -91,14 +91,14 @@ class Auth extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           SizedBox(
                             width: double.infinity,
                             child: BaseButton(
                               padding: MaterialStateProperty.all(
-                                EdgeInsets.symmetric(
+                                const EdgeInsets.symmetric(
                                     vertical: 15.0, horizontal: 60.0),
                               ),
                               styleVariants: ButtonStyleVariants.outline,
