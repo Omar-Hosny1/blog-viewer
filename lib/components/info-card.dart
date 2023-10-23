@@ -34,7 +34,7 @@ class InfoCard extends StatelessWidget {
             height: dividerHeight ?? 50,
             color: dividerColor ?? SecondaryColor,
             width: dividerWidth ?? 3,
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               right: 10,
             ),
           ),
@@ -42,7 +42,7 @@ class InfoCard extends StatelessWidget {
           child: Text(
             text,
             style: textStyle ??
-                TextStyle(
+                const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: SecondaryColor,

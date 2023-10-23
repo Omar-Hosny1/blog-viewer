@@ -14,74 +14,78 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int id = Get.arguments ?? 1;
-    return Scaffold(
-      backgroundColor: PrimaryColor,
-      appBar: AppBar(
-        elevation: 0,
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: PrimaryColor,
-        leading: InkWell(
-          onTap: () => Get.back(),
-          child: Image.asset(
-            'assets/icons/back.png',
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: PrimaryColor,
+          leading: InkWell(
+            onTap: () => Get.back(),
+            child: Image.asset(
+              'assets/icons/back.png',
+            ),
+          ),
+          title: Text(id.toString()),
+          centerTitle: true,
+        ),
+        body: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Center(child: Image.asset("assets/icons/overlyB.png")),
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                  right: 20,
+                ),
+                child: Column(
+                  children: [
+                    FutureBuilder(
+                      future: BlogService.getBlog(id.toString()),
+                      builder: (context, snapshot) => handleNetworkState(
+                        snapshot: snapshot,
+                        buildChild: (Blog blog) => Column(
+                          children: [
+                            InfoCard(
+                              text: blog.title,
+                              withDivider: true,
+                              withCopy: true,
+                              copyColor: SecondaryColor,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            InfoCard(
+                              text: blog.body,
+                              textStyle: const TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w300,
+                                color: Colors.white,
+                              ),
+                              withCopy: true,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: BaseButton(
+                        onClick: Get.back,
+                        label: 'Back',
+                        imagePath: 'assets/icons/thunder.png',
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        title: Text(id.toString()),
-        centerTitle: true,
-      ),
-      body: Stack(
-        children: [
-          Center(child: Image.asset("assets/icons/overlyB.png")),
-          Container(
-            margin: const EdgeInsets.only(
-              top: 20,
-              left: 20,
-              right: 20,
-            ),
-            child: Column(
-              children: [
-                FutureBuilder(
-                  future: BlogService.getBlog(id.toString()),
-                  builder: (context, snapshot) => handleNetworkState(
-                    snapshot: snapshot,
-                    buildChild: (Blog blog) => Column(
-                      children: [
-                        InfoCard(
-                          text: blog.title,
-                          withDivider: true,
-                          withCopy: true,
-                          copyColor: SecondaryColor,
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        InfoCard(
-                          text: blog.body,
-                          textStyle: const TextStyle(
-                            fontSize: 19,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.white,
-                          ),
-                          withCopy: true,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: BaseButton(
-                    onClick: Get.back,
-                    label: 'Back',
-                    imagePath: 'assets/icons/thunder.png',
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

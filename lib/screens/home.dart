@@ -10,26 +10,31 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          FutureBuilder(
-            future: BlogService.fetchBlogs(),
-            builder: (context, snapshot) {
-              return handleNetworkState(
-                snapshot: snapshot,
-                buildChild: (List<Blog> data) => Expanded(
-                  child: ListView.builder(
-                    itemBuilder: (context, index) => BlogView(
-                      blog: data[index],
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          child: Column(
+            children: [
+              FutureBuilder(
+                future: BlogService.fetchBlogs(),
+                builder: (context, snapshot) {
+                  return handleNetworkState(
+                    snapshot: snapshot,
+                    buildChild: (List<Blog> data) => Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) => BlogView(
+                          blog: data[index],
+                        ),
+                        itemCount: data.length,
+                      ),
                     ),
-                    itemCount: data.length,
-                  ),
-                ),
-              );
-            },
+                  );
+                },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

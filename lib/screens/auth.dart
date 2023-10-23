@@ -41,81 +41,88 @@ class Auth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.lazyPut(() => AuthController());
-    return Scaffold(
-      backgroundColor: PrimaryColor,
-      body: Stack(
-        children: [
-          Center(child: Image.asset("assets/icons/overlyB.png")),
-          Column(
-            children: [
-              Center(
-                child: Image.asset('assets/icons/logo.png'),
-              ),
-              SingleChildScrollView(
-                child: Form(
-                    key: _formKey,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 30),
-                      child: Column(
-                        children: [
-                          BaseInput(
-                            label: 'Email',
-                            onSaved: (value) => _enteredEmail = value,
-                            validator: (value) => validateEmail(value ?? ''),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          BaseInput(
-                            label: 'Password',
-                            onSaved: (value) => _enteredPassword = value,
-                            isPassword: true,
-                            validator: (value) => validatePassword(value ?? ''),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: Obx(
-                              () => BaseButton(
-                                padding: MaterialStateProperty.all(
-                                  const EdgeInsets.symmetric(
-                                    vertical: 15.0,
-                                    horizontal: 60.0,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: PrimaryColor,
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Stack(
+              children: [
+                Center(child: Image.asset("assets/icons/overlyB.png")),
+                Column(
+                  children: [
+                    Center(
+                      child: Image.asset('assets/icons/logo.png'),
+                    ),
+                    SingleChildScrollView(
+                      child: Form(
+                          key: _formKey,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 30),
+                            child: Column(
+                              children: [
+                                BaseInput(
+                                  label: 'Email',
+                                  onSaved: (value) => _enteredEmail = value,
+                                  validator: (value) => validateEmail(value ?? ''),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                BaseInput(
+                                  label: 'Password',
+                                  onSaved: (value) => _enteredPassword = value,
+                                  isPassword: true,
+                                  validator: (value) => validatePassword(value ?? ''),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: Obx(
+                                    () => BaseButton(
+                                      padding: MaterialStateProperty.all(
+                                        const EdgeInsets.symmetric(
+                                          vertical: 15.0,
+                                          horizontal: 60.0,
+                                        ),
+                                      ),
+                                      onClick: isLoading.isTrue ? null : onSubmitForm,
+                                      label: isLoginMode.isTrue ? 'Login' : 'Sign up',
+                                      imagePath: 'assets/icons/login.png',
+                                    ),
                                   ),
                                 ),
-                                onClick: isLoading.isTrue ? null : onSubmitForm,
-                                label: isLoginMode.isTrue ? 'Login' : 'Sign up',
-                                imagePath: 'assets/icons/login.png',
-                              ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: BaseButton(
+                                    padding: MaterialStateProperty.all(
+                                      const EdgeInsets.symmetric(
+                                          vertical: 15.0, horizontal: 60.0),
+                                    ),
+                                    styleVariants: ButtonStyleVariants.outline,
+                                    onClick: () {
+                                      isLoginMode.value = !isLoginMode.value;
+                                    },
+                                    label: 'Switch Mode',
+                                    imagePath: 'assets/icons/signup.png',
+                                  ),
+                                )
+                              ],
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: BaseButton(
-                              padding: MaterialStateProperty.all(
-                                const EdgeInsets.symmetric(
-                                    vertical: 15.0, horizontal: 60.0),
-                              ),
-                              styleVariants: ButtonStyleVariants.outline,
-                              onClick: () {
-                                isLoginMode.value = !isLoginMode.value;
-                              },
-                              label: 'Switch Mode',
-                              imagePath: 'assets/icons/signup.png',
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
-              )
-            ],
-          )
-        ],
+                          )),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
