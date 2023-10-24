@@ -37,7 +37,7 @@ class AuthController extends GetxController {
           'Logged in Successfuly',
         );
         _saveDataInPrefs(response);
-        Get.toNamed(Home.routeName);
+        Get.offAndToNamed(Home.routeName);
       },
     );
   }
@@ -55,7 +55,7 @@ class AuthController extends GetxController {
           'Signed up Successfuly',
         );
         _saveDataInPrefs(response);
-        Get.toNamed(Home.routeName);
+        Get.offAndToNamed(Home.routeName);
       },
     );
   }
