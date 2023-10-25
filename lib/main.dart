@@ -3,6 +3,7 @@ import 'package:blog_viewer/routes/routes.dart';
 import 'package:blog_viewer/screens/auth.dart';
 import 'package:blog_viewer/screens/home.dart';
 import 'package:blog_viewer/screens/splash.dart';
+import 'package:blog_viewer/utils/binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,9 +19,9 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Blog Viewer',
+      initialBinding: AppBinding(),
       getPages: Routes.routes,
-      home: GetBuilder(
-        init: AuthController(),
+      home: GetBuilder<AuthController>(
         builder: (controller) {
           return FutureBuilder(
             future: controller.getInitialRoute(),
