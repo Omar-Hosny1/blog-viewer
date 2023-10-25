@@ -24,6 +24,12 @@ class AuthController extends GetxController {
     );
   }
 
+  logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    Get.offAllNamed(Auth.routeName);
+  }
+
   signin({required String email, required String password}) {
     handleNetworkRequests(
       tryLogic: () async {
@@ -62,10 +68,12 @@ class AuthController extends GetxController {
 
   Future<String> getInitialRoute() async {
     final prefs = await SharedPreferences.getInstance();
-    final expiresIn = DateTime.parse(
-      prefs.getString(EXPIRES_IN) ??
-          DateTime.now().subtract(const Duration(hours: 1)).toIso8601String(),
-    );
+    final prefsExpiresIn = prefs.getString(EXPIRES_IN);
+    if (prefsExpiresIn == null) {
+      return Auth.routeName;
+    }
+
+    final expiresIn = DateTime.parse(prefsExpiresIn);
 
     if (expiresIn.isBefore(DateTime.now())) {
       return Auth.routeName;
