@@ -13,6 +13,7 @@ class BaseButton extends StatelessWidget {
     required this.label,
     this.padding,
     this.withIcon = true,
+    this.isLoading,
   });
 
   final ButtonStyleVariants styleVariants;
@@ -22,6 +23,7 @@ class BaseButton extends StatelessWidget {
   final String label;
   final MaterialStateProperty<EdgeInsetsGeometry?>? padding;
   final bool? withIcon;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,7 @@ class BaseButton extends StatelessWidget {
         ),
       ),
       onPressed: onClick,
-      child: Text(label),
+      child: Text(isLoading == true ? 'Loading...' : label),
     );
   }
 }

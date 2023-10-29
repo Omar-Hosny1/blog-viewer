@@ -46,7 +46,7 @@ class Auth extends StatelessWidget {
         backgroundColor: PrimaryColor,
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.only(top: 30),
+            margin: const EdgeInsets.only(top: 30),
             child: Stack(
               children: [
                 Center(child: Image.asset("assets/icons/overlyB.png")),
@@ -89,6 +89,7 @@ class Auth extends StatelessWidget {
                                           horizontal: 60.0,
                                         ),
                                       ),
+                                      isLoading: isLoading.value,
                                       onClick: isLoading.isTrue ? null : onSubmitForm,
                                       label: isLoginMode.isTrue ? 'Login' : 'Sign up',
                                       imagePath: 'assets/icons/login.png',

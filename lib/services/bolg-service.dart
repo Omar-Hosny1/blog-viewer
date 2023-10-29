@@ -32,4 +32,27 @@ class BlogService {
       throw const HttpException('Check Your Network, And Try Again Later');
     }
   }
+
+  static Future<void> addBlog({required Blog blog}) async {
+    try {
+      const addBlogEP = "https://jsonplaceholder.typicode.com/posts";
+      final parsedUrl = Uri.parse(addBlogEP);
+      final response = await http.post(
+        parsedUrl,
+        body: json.encode(
+          {
+            'title': blog.title,
+            'body': blog.body,
+            'id': blog.id,
+            'userId': blog.userId
+          },
+        ),
+      );
+      if (![200, 201].contains(response.statusCode)) {
+        throw const HttpException("Something Went Wrong");
+      }
+    } catch (e) {
+      throw const HttpException('Check Your Network, And Try Again Later');
+    }
+  }
 }
