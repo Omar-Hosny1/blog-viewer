@@ -1,5 +1,3 @@
-# Flutter JSON Placeholder App
-
 ## Project Description
 This Flutter app leverages the JSON placeholder API to retrieve and present posts in a user-friendly manner. It incorporates a wide array of features to enhance the user experience, including authentication, token expiration actions, shared preferences for user data storage, and much more. The app follows the MVC architecture pattern and emphasizes the separation of concerns by fetching data in a dedicated services class. Additionally, it incorporates reusable components and various helper functions that enhance the overall functionality and maintainability of the application.
 
