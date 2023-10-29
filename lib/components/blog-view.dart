@@ -90,7 +90,7 @@ class BlogView extends StatelessWidget {
             onTap: () {
               Get.toNamed(
                 Details.routeName,
-                arguments: blog.id,
+                arguments: blog,
               );
             },
             child: SizedBox(
