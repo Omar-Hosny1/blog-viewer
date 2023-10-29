@@ -1,3 +1,4 @@
+import 'package:blog_viewer/screens/add-blog.dart';
 import 'package:blog_viewer/screens/auth.dart';
 import 'package:blog_viewer/screens/details.dart';
 import 'package:blog_viewer/screens/home.dart';
@@ -16,6 +17,10 @@ class Routes {
     GetPage(
       name: Auth.routeName,
       page: () => Auth(),
+    ),
+    GetPage(
+      name: AddBlog.routeName,
+      page: () => AddBlog(),
     ),
   ];
 }

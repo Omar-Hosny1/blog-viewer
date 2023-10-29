@@ -21,3 +21,14 @@ String? validatePassword(String value) {
   }
   return null;
 }
+
+String? validateText(String? value) {
+  if (value == null) {
+    return 'Please enter a value';
+  }
+  value = value.trim();
+  if (value.isEmpty) {
+    return 'Please enter a value';
+  }
+  return null;
+}
