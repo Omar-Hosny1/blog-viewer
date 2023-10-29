@@ -1,21 +1,19 @@
 import 'package:blog_viewer/components/base-button.dart';
 import 'package:blog_viewer/components/info-card.dart';
-import 'package:blog_viewer/models/blog.dart';
-import 'package:blog_viewer/screens/user-details.dart';
-import 'package:blog_viewer/services/bolg-service.dart';
+import 'package:blog_viewer/models/user.dart';
+import 'package:blog_viewer/services/user-service.dart';
 import 'package:blog_viewer/utils/colors.dart';
 import 'package:blog_viewer/utils/handle-network-state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Details extends StatelessWidget {
-  const Details({super.key});
-  static const routeName = '/details';
+class UserDetails extends StatelessWidget {
+  const UserDetails({super.key});
+  static const routeName = '/user-details';
 
   @override
   Widget build(BuildContext context) {
-    final Blog blog = Get.arguments;
-    final id = blog.id;
+    final int userId = Get.arguments;
 
     return SafeArea(
       child: Scaffold(
@@ -29,7 +27,7 @@ class Details extends StatelessWidget {
               'assets/icons/back.png',
             ),
           ),
-          title: Text(id.toString()),
+          title: Text(userId.toString()),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -45,13 +43,13 @@ class Details extends StatelessWidget {
                 child: Column(
                   children: [
                     FutureBuilder(
-                      future: BlogService.getBlog(id.toString()),
+                      future: UserService.fetchUserData(userId.toString()),
                       builder: (context, snapshot) => handleNetworkState(
                         snapshot: snapshot,
-                        buildChild: (Blog blog) => Column(
+                        buildChild: (User user) => Column(
                           children: [
                             InfoCard(
-                              text: blog.title,
+                              text: user.name,
                               withDivider: true,
                               withCopy: true,
                               copyColor: SecondaryColor,
@@ -60,7 +58,16 @@ class Details extends StatelessWidget {
                               height: 15,
                             ),
                             InfoCard(
-                              text: blog.body,
+                              text: user.email,
+                              textStyle: const TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w300,
+                                color: Colors.white,
+                              ),
+                              withCopy: true,
+                            ),
+                            InfoCard(
+                              text: user.phone,
                               textStyle: const TextStyle(
                                 fontSize: 19,
                                 fontWeight: FontWeight.w300,
@@ -72,23 +79,6 @@ class Details extends StatelessWidget {
                         ),
                       ),
                     ),
-                     const SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: BaseButton(
-                        padding: MaterialStateProperty.all(
-                          const EdgeInsets.all(25),
-                        ),
-                        onClick: () => Get.toNamed(
-                          UserDetails.routeName,
-                          arguments: blog.userId,
-                        ),
-                        label: 'Show User Data',
-                        withIcon: false,
-                      ),
-                    ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -97,12 +87,9 @@ class Details extends StatelessWidget {
                       child: BaseButton(
                         onClick: Get.back,
                         label: 'Back',
-                        imagePath: 'assets/icons/thunder.png',
+                        withIcon: false,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    )
                   ],
                 ),
               ),
